@@ -4,24 +4,12 @@
     <main>
       <EnjoyableLocally/>
       <Highlights/>
-      <section class="sliders">
-        <div class="slider">
-          <div class="image-slide"></div>
-          <div class="text-slide">
-            <h2>Family Gathering</h2>
-            <p class="text-1">We love catering for entire families. So please bring everyone along for a special meal with your loved ones. We’ll provide a memorable experience for all.</p>
-            <router-link to="/reservation" tag="button">Book a table</router-link>
-          </div>
-          <div class="nav-slide">
-            <!-- <div class="line-slide"></div> -->
-            <ul>
-              <li class="h3-bis">Family gathering</li>
-              <li class="h3-bis">Special events</li>
-              <li class="h3-bis">social events</li>
-            </ul>
-          </div>
-        </div>
+      <Sliders/>
+      <section class="reservation">
+          <h2>Ready to make a reservation ?</h2>
+          <router-link to="/reservation" tag="button">Book a table</router-link>
       </section>
+      <Footer/>
     </main>
   </div>
 </template>
@@ -30,13 +18,17 @@
 import HeaderHome from '@/components/HeaderHome'
 import EnjoyableLocally from '@/components/EnjoyableLocally'
 import Highlights from '@/components/Highlights'
+import Sliders from '@/components/Sliders'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'Home',
   components: {
     HeaderHome,
     EnjoyableLocally,
-    Highlights
+    Highlights,
+    Sliders,
+    Footer
   }
 }
 </script>
@@ -44,71 +36,73 @@ export default {
 <style lang="scss" scoped>
   @import './public/sass/colors.scss';
 
-  .sliders {
+  .reservation {
     width: 100%;
-    height: 920px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .slider {
-      width: 1110px;
-      height: 600px;
-      display: flex;
-      position: relative;
-      .image-slide {
-        width: 540px;
-        height: 600px;
-        background-image: url("/images/homepage/family-gathering-desktop@2x.jpg");
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
-      .text-slide {
-        width: 445px;
-        height: 288px;
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        right: 0;
-        top: 63px;
-        h2 {
-          margin: 0;
-        }
-        p {
-          margin-top: 16px;
-          margin-bottom: 32px;
+    height: 240px;
+    background-image: url("/images/homepage/ready-bg-desktop@2x.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    h2 {
+      color: $white;
+      top: 92px;
+      left: 165px;
+      margin: 0;
+    }
+    button {
+      width: 245px;
+      background-color: transparent;
+      top: 88px;
+      right: 165px;
+    }
+
+    h2, button {
+      position: absolute;
+    }
+  }
+
+   @media screen and (max-width: 1200px) {
+      .reservation {
+        height: 272px;
+        background-size: cover;
+            h2 {
+          top: 65px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          text-align: center;
         }
         button {
-          width: 245px;
-          background-color: $primaryBackground;
+          top: 144px;
+          left: 0;
+          right: 0;
+          margin: auto;
         }
       }
-      .nav-slide {
-        width: 445px;
-        height: 108px;
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        bottom: 63px;
-        right: 0px;
-        // .line-slide {
-        //   width: 95px;
-        //   height: 1px;
-        //   background-color: $primary;
-        // }
-        ul {
-          padding-left: 0;
-          margin: 0;
-          height: 108px;
-          width: 188px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          li {
-            list-style-type: none;
-            text-align: left!important;
-          }
+   }
+
+    @media screen and (max-width: 769px) {
+      .reservation {
+        background-image: url("/images/homepage/ready-bg-tablet@2x.jpg");
+        background-size: contain;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .reservation {
+        height: 328px;
+        background-image: url("/images/homepage/ready-bg-mobile@2x.jpg");
+        background-size: cover;
+        h2 {
+          font-size: 32px!important;
+          line-height: 40px!important;
+          top: 80px;
+        }
+        button {
+          top: 184px;
         }
       }
     }
-  }
+
+
 </style>

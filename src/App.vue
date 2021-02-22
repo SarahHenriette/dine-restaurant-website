@@ -78,8 +78,17 @@ body {
     &:hover {
       background-color: $white;
       color: $primaryBackground;
+      border: solid 1px $primaryBackground;
     }
   }
+    label, .input-number-person  {
+        font-family: $fontSpartan;
+    }
+    input {
+      &::placeholder {
+        font-family: $fontSpartan;
+      }
+    }
 
   .decoration-text {
     width: 71px;
