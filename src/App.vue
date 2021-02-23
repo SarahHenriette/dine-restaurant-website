@@ -69,7 +69,7 @@ body {
       letter-spacing: -0.1875px;
   }
 
-  button {
+  button, input[type="submit" i] {
     height: 64px;
     cursor: pointer;
     color: white;
@@ -81,7 +81,7 @@ body {
       border: solid 1px $primaryBackground;
     }
   }
-    label, .input-number-person  {
+    label, .input-number-person, .error  {
         font-family: $fontSpartan;
     }
     input {
