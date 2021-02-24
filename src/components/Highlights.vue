@@ -73,6 +73,7 @@
     display: flex;
     flex-direction: column;
     right: 165px;
+    top: 255px;
     .line-articles-highlights {
       width: 540px;
       height: 1px;
