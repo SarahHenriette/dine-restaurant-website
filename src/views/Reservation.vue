@@ -6,25 +6,40 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="background-decoration-lines" width="160" height="76"><g fill="#9E7F66" fill-rule="evenodd"><path d="M0 70h160v6H0zM0 56h160v6H0zM0 42h160v6H0zM0 28h160v6H0zM0 14h160v6H0zM0 0h160v6H0z"/></g></svg>
     </section>
     <form action=""  @submit.prevent="submit">
-      <input type="text" placeholder="Name" name="name" id="name" v-model="name.value" :class="name.error">
+      <input type="text" placeholder="Name" name="name" id="name" v-model="name.value" :class="name.error" @focus="focusInput">
       <div :class="name.error" v-if="name.messageError.length > 0" class="containError"><span v-for="message in name.messageError" :key="message">{{ message }}</span></div>
 
-      <input type="email" placeholder="Email" v-model="email.value" :class="email.error">
+      <input type="email" name="email" placeholder="Email" v-model="email.value" :class="email.error" @focus="focusInput">
       <div :class="email.error" v-if="email.messageError.length > 0" class="containError"><span v-for="message in email.messageError" :key="message">{{ message }}</span></div>
 
-      <div class="input-date"><label for="date" :class="date.error">Pick a date</label><div class="contains-date"><input type="number" class="contain-date" min="01" max="12" placeholder="MM" v-model="date.valueMonth" :class="date.error"><input type="number" class="contain-date" min="01" max="31" placeholder="DD" v-model="date.valueDay" :class="date.error"><input type="number" class="contain-date" min="2021" max="2022" placeholder="YYYY"  v-model="date.valueYear" :class="date.error"></div></div>
+      <div class="input-date">
+        <label for="date" :class="date.error">Pick a date</label>
+        <div class="contains-date">
+          <input type="number" class="contain-date" min="01" max="12" placeholder="MM" v-model="date.valueMonth" :class="date.error">
+          <input type="number" class="contain-date" min="01" max="31" placeholder="DD" v-model="date.valueDay" :class="date.error">
+          <input type="number" class="contain-date" min="2021" max="2022" placeholder="YYYY" v-model="date.valueYear" :class="date.error">
+        </div>
+      </div>
       <div :class="date.error" v-if="date.messageError.length > 0" class="containError contain-date"><span v-for="message in date.messageError" :key="message">{{ message }}</span></div>
-
-      <div class="input-time"><label for="time" :class="time.error">Pick a time</label><div class="contains-time"><input type="number" class="contain-time" min="08" max="23" placeholder="09" v-model="time.valueHours" :class="time.error"><input type="number" class="contain-time" min="00" max="59" placeholder="00" v-model="time.valueMinutes" :class="time.error"><input type="text" class="contain-time"  placeholder="AM" v-model="time.valueMoment" :class="time.error"></div></div>
+      <div class="input-time">
+        <label for="time" :class="time.error">Pick a time</label>
+        <div class="contains-time">
+          <input type="number" class="contain-time" min="00" max="12" placeholder="09" v-model="time.valueHours" :class="time.error">
+          <input type="number" class="contain-time" min="00" max="59" placeholder="00" v-model="time.valueMinutes" :class="time.error" >
+          <select name="moments-time" id="moments-time" class="contain-time" v-model="time.valueMoment" :class="time.error" >
+            <option value="" disabled selected>AM</option>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
       <div :class="time.error" v-if="time.messageError.length > 0" class="containError contain-time"><span v-for="message in time.messageError" :key="message">{{ message }}</span></div>
-      
       <div class="input-number-person">
         <span @click="decrementPeople" class="moins">-</span>
         <p><span>{{ nbrPeople }}</span> people</p>
         <span @click="incrementPeople" class="plus">+</span>
       </div>
       <input type="submit"  value="make reservation" id="btn-submit">
-      <!-- <router-link to="/reservation" tag="button">make reservation</router-link> -->
     </form>
     <Footer/>
   </div>
@@ -76,17 +91,15 @@ export default {
       this.nbrPeople = this.nbrPeople + 1
     },
     submit() {
-      console.log('okkk')
- 
-          this.verifyInputEmpty(this.name)
-          this.verifyInputEmpty(this.email)
-          this.verifyInputEmptyDate(this.date)
-          this.verifyInputEmptyTime(this.time)
-          this.verifyValidEmail()
+      this.verifyInputEmpty(this.name)
+      this.verifyInputEmpty(this.email)
+      this.verifyInputEmptyDate(this.date)
+      this.verifyInputEmptyTime(this.time)
+      this.verifyValidEmail()
 
-    if(this.name.value !== "" && this.email.value !== "" && this.time.valueHours !== "" && this.time.valueMinutes !== ""  && this.time.valueMoment !== ""
-    && this.date.valueMonth !== "" && this.date.valueDay !== "" && this.date.valueYear !== ""
-    ) {
+      if(this.name.value !== "" && this.email.value !== "" && this.time.valueHours !== "" && this.time.valueMinutes !== ""  && this.time.valueMoment !== ""
+      && this.date.valueMonth !== "" && this.date.valueDay !== "" && this.date.valueYear !== ""
+      ) {
           alert('Votre message à bien été envoyé')
           this.name.value = ""
           this.email.value= ""
@@ -96,6 +109,9 @@ export default {
           this.date.valueMonth = ""
           this.date.valueDay = ""
           this.date.valueYear = ""
+          this.time.error = ""
+          this.date.error = ""
+
         }
     },
 
@@ -128,7 +144,19 @@ export default {
         }
         this.email.messageError.push("This address is not valid")
         this.email.error = "error"
-      }
+      },
+      focusInput(e){
+        this.actionFocusInput(e, "name", this.name)
+        this.actionFocusInput(e, "email", this.email)
+        this.actionFocusInput(e, "message", this.message)
+      }, 
+      actionFocusInput(e, value, variable){
+        console.log(e.target.name)
+        if(e.target.name == value) {
+          variable.messageError = ""
+          variable.error = ""
+        }
+      },
   }
 }
 </script>
@@ -163,7 +191,7 @@ export default {
     flex-direction: column;
     justify-content:space-evenly;
     align-items: center;
-    // padding: 48px;
+    box-shadow: 5px 28px 44px rgba($color: $ombres, $alpha: 0.5);
     .error {
       color: red;
       font-size: 10px;
@@ -195,13 +223,6 @@ export default {
     label {
       width: 102px;
     }
-    // input[type="date" i],  input[type="time" i]{
-    //   width: 289px;
-    // }
-    // input[type="number" i]{
-    //   width: 444px;
-    //   height: 45px;
-    // }
     .input-date, .input-time {
       width: 444px;
       display: flex;
@@ -217,6 +238,27 @@ export default {
         width: 289px;
         display: flex;
         justify-content: space-between;
+        select {
+          border: none;
+          border-bottom: 1px solid $primaryBackground;
+          font-size: 18px;
+          &:focus {
+            outline: none;
+          }
+
+          option[value=""][disabled] {
+            display: none;
+          }
+
+        }
+        select.error {
+          border-bottom: 1px solid red;
+          color: red;
+          font-size: 15px;
+          &::placeholder {
+            color: red;
+          }
+        }
       }
       .contain-date, .contain-time {
         width: 80px;

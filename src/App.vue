@@ -74,17 +74,24 @@ body {
     cursor: pointer;
     color: white;
     border: 1px solid $white;
-    transition: background-color linear .5s;
+    transition: background-color linear .8s;
+    &:focus {
+      outline: none;
+    }
     &:hover {
       background-color: $white;
       color: $primaryBackground;
       border: solid 1px $primaryBackground;
     }
   }
-    label, .input-number-person, .error  {
+    label, .input-number-person, .error, select  {
         font-family: $fontSpartan;
     }
     input {
+      font-size: 18px;
+      &:focus {
+        outline: none;
+      }
       &::placeholder {
         font-family: $fontSpartan;
       }

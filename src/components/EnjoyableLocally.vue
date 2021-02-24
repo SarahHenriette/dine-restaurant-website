@@ -52,7 +52,8 @@
         padding-top: 46px;
          .image-enjoyable {
           background-image: url("/images/homepage/enjoyable-place-desktop@2x.jpg");
-          margin-bottom: 60px;        
+          margin-bottom: 60px;   
+          box-shadow: 5px 28px 44px rgba($color: $ombres, $alpha: 0.5);
         }
       }
       .locally {
@@ -165,6 +166,7 @@
           bottom: 113px;
           .image-locally {
             background-image: url("/images/homepage/locally-sourced-tablet@2x.jpg");
+            box-shadow: 5px 28px 44px rgba($color: $ombres, $alpha: 0.5);
             svg {
                top: 228px;
                right: -58px;      

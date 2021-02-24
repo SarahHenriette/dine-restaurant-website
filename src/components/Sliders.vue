@@ -44,44 +44,36 @@ export default {
       let textSlide = document.querySelectorAll('.text-slide')
       let lineSlide = document.querySelectorAll('ul .h3-bis')
 
-
-      console.log(images)
-      console.log(textSlide)
-      console.log(lineSlide)
-
-
-  let i = 0
-
+      // initialisation de l'index du tableau
+      let i = 0
+      
+      // toutes les 5 secondes je souhaite que le slide change
       setInterval(() => {
-        console.log(i)
-        if(images[i].classList.contains('active')) {
-            images[i].classList.remove('active')
-            textSlide[i].classList.remove('active')
-            lineSlide[i].classList.remove('active')
+            //je supprime la class active du slide actif et je l'ajoute au prochain slide
+              images[i].classList.remove('active')
+              textSlide[i].classList.remove('active')
+              lineSlide[i].classList.remove('active')
+              images[i + 1].classList.add('active')
+              textSlide[i + 1].classList.add('active')
+              lineSlide[i + 1].classList.add('active')
 
-            images[i + 1].classList.add('active')
-            textSlide[i + 1].classList.add('active')
-            lineSlide[i + 1].classList.add('active')
-
-            i = i + 1
-        }
-        if(i == images.length-1) {
-          setTimeout(() => {
+              i = i + 1
+        //si l'index est arriver au dernier slide alors remettre à 0        
+       if(i >= 2) {
+          setTimeout(() => {              
             images[i].classList.remove('active')
             textSlide[i].classList.remove('active')
             lineSlide[i].classList.remove('active')
 
             i= 0
+            
             images[i].classList.add('active')
             textSlide[i].classList.add('active')
             lineSlide[i].classList.add('active')
 
-
           }, 5000);
         }
-      }, 5000);
-
-    
+      }, 10000);
     }
 }
 </script>
@@ -119,6 +111,7 @@ export default {
         display: none;
         animation: imageSlide .5s linear;
         z-index: 6;
+        box-shadow: 5px 28px 44px rgba($color: $ombres, $alpha: 0.5);
       }
 
       @keyframes imageSlide {
@@ -187,9 +180,11 @@ export default {
             text-align: left!important;
             display: flex;
             align-items: center;
+            opacity: 0.5;
 
           }
           .active {
+            opacity: 1;
              .line-slide {
                 background-color: $primary;
               }
@@ -217,7 +212,15 @@ export default {
         .image-slide {
             width: 573px;
             height: 360px;
-            background-image: url("/images/homepage/family-gathering-tablet@2x.jpg");
+        }
+        .family{
+          background-image: url("/images/homepage/family-gathering-tablet@2x.jpg");
+        }
+        .special {
+          background-image: url("/images/homepage/special-events-tablet@2x.jpg");
+        }
+        .social {
+          background-image: url("/images/homepage/social-events-tablet@2x.jpg");
         }
         .text-slide {
             width: 475px;
@@ -238,6 +241,15 @@ export default {
                 width: 689px;
                 height: 37px;
                 flex-direction: row;
+                li {
+                  display: flex;
+                  flex-direction: column-reverse;
+                  .line-slide {
+                    margin-right: 0;
+                    width: 48px;
+                    margin-top: 8px;
+                  }
+                }
             }
         }
       }
@@ -255,7 +267,15 @@ export default {
             .image-slide {
                width: 326px;
                height: 400px; 
-               background-image: url("/images/homepage/family-gathering-mobile@2x.jpg");
+            }
+            .family{
+              background-image: url("/images/homepage/family-gathering-mobile@2x.jpg");
+            }
+            .special {
+              background-image: url("/images/homepage/special-events-mobile@2x.jpg");
+            }
+            .social {
+              background-image: url("/images/homepage/social-events-mobile@2x.jpg");
             }
             .text-slide {
                 width: 326px;
@@ -277,6 +297,12 @@ export default {
                     flex-direction: column;
                     align-items: center;
                     height: 116px;
+                    li .line-slide {
+                      margin-top: 0
+                      
+                      
+                      ;
+                    }
                 }
             }
           }

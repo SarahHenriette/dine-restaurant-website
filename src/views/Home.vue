@@ -40,7 +40,7 @@ export default {
     width: 100%;
     height: 240px;
     background-image: url("/images/homepage/ready-bg-desktop@2x.jpg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     position: relative;
     h2 {
