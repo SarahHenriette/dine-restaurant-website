@@ -121,7 +121,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1350px) {
   .highlights {
     height: 891px;
     .text-highlights, .articles-highlights {

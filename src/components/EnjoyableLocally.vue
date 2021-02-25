@@ -106,7 +106,7 @@
     }
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1350px) {
     main {
       .enjoyable-locally {
         height: 1490px;

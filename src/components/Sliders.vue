@@ -37,7 +37,6 @@
 export default {
   
   methods: {
-   
   },
    mounted () {
       let images = document.querySelectorAll('.image-slide')
@@ -74,7 +73,9 @@ export default {
           }, 5000);
         }
       }, 10000);
-    }
+    },
+   
+    
 }
 </script>
 <style lang="scss" scoped>
@@ -181,7 +182,7 @@ export default {
             display: flex;
             align-items: center;
             opacity: 0.5;
-
+            cursor: pointer;
           }
           .active {
             opacity: 1;
